@@ -1,4 +1,4 @@
-name: Docker Build
+name: Spring Boot Build
 
 on:
   push:
@@ -6,11 +6,18 @@ on:
       - main
 
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Build Docker image
-        run: docker build -t my-app .
+      - name: Set Up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 25
+
+      - name: Build Application
+        run: mvn clean install
