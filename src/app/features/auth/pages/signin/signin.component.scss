@@ -6,10 +6,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding: 5.5rem 1rem 2.5rem;
   position: relative;
+  background: #f4f1ed;
   overflow: hidden;
-  background: #06060e;
 }
 
 .bg-layer {
@@ -23,28 +23,29 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255,140,0,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,140,0,0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(rgba(232,98,42,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,98,42,.06) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.35;
-  animation: orb-float 8s ease-in-out infinite;
+  filter: blur(70px);
 }
+
 .orb-1 {
-  width: 450px; height: 450px;
-  background: radial-gradient(circle, #ff6b00, transparent 70%);
-  top: -80px; left: -80px;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(#e8622a, transparent 70%);
+  opacity: .12;
 }
+
 .orb-2 {
-  width: 350px; height: 350px;
-  background: radial-gradient(circle, #b5451b, transparent 70%);
-  bottom: -60px; right: -60px;
-  animation-delay: -4s;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(#f09060, transparent 70%);
+  opacity: .1;
 }
 
 @keyframes orb-float {
@@ -59,11 +60,11 @@
   align-items: center;
   gap: 0.5rem;
   z-index: 10;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Manrope', sans-serif;
 
   .brand-icon { font-size: 1.4rem; color: #ff6b00; }
-  .brand-text { font-size: 1.1rem; font-weight: 800; color: #fff; letter-spacing: 0.1em; }
-  .brand-sub { font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 2px; }
+  .brand-text { font-size: 1.1rem; font-weight: 800; color: #1a1208; letter-spacing: 0.1em; }
+  .brand-sub { font-size: 0.7rem; color: #a08060; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 2px; }
 }
 
 .form-card {
@@ -71,12 +72,14 @@
   z-index: 1;
   width: 100%;
   max-width: 420px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #ffffff;
+  border: 1px solid rgba(232,98,42,.12);
   border-radius: 20px;
   padding: 2.5rem;
   backdrop-filter: blur(20px);
-  box-shadow: 0 0 0 1px rgba(255,107,0,0.1), 0 30px 80px rgba(0,0,0,0.5);
+  box-shadow: 0 1px 3px rgba(0,0,0,.04),
+    0 8px 32px rgba(232,98,42,.08),
+    0 24px 64px rgba(0,0,0,.06);;
   animation: card-in 0.5s ease-out both;
 }
 
@@ -88,13 +91,13 @@
 .form-header {
   margin-bottom: 2rem;
   h1 {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Manrope', sans-serif;
     font-size: 1.85rem;
     font-weight: 800;
-    color: #fff;
+    color: #1a1208;
     letter-spacing: -0.02em;
   }
-  p { font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-top: 0.3rem; }
+  p { font-size: 0.85rem; color: #9a8070; margin-top: 0.3rem; }
 }
 
 .field-group {
@@ -105,7 +108,7 @@
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
+    color: #7a6858;
     margin-bottom: 0.45rem;
   }
 }
@@ -113,8 +116,8 @@
 .input-wrap {
   display: flex;
   align-items: center;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: #faf8f6;
+  border: 1.5px solid rgba(232,98,42,.12);
   border-radius: 10px;
   transition: border-color 0.2s, box-shadow 0.2s;
 
@@ -128,7 +131,7 @@
 
   .input-icon {
     padding: 0 0.7rem;
-    color: rgba(255,255,255,0.2);
+    color: #b29a8a;
     font-size: 0.9rem;
     pointer-events: none;
   }
@@ -138,22 +141,25 @@
     background: transparent;
     border: none;
     outline: none;
-    color: #fff;
+    color: #1a1208;
     font-size: 0.9rem;
     font-family: 'DM Sans', sans-serif;
     padding: 0.7rem 0.75rem 0.7rem 0;
-    &::placeholder { color: rgba(255,255,255,0.2); }
+    &::placeholder { color: #a88a75; }
   }
 }
 
 .toggle-pwd {
   background: none;
   border: none;
-  color: rgba(255,255,255,0.3);
+  color: #a88a75;
   cursor: pointer;
   padding: 0 0.75rem;
   font-size: 1rem;
-  &:hover { color: rgba(255,107,0,0.7); }
+
+  &:hover {
+    color: #e8622a;
+  }
 }
 
 .err-msg {
@@ -165,12 +171,12 @@
 }
 
 .api-error {
-  background: rgba(255,80,80,0.08);
-  border: 1px solid rgba(255,80,80,0.2);
+  background: #fff1f0;
+  border: 1px solid #ffd4cf;
   border-radius: 8px;
   padding: 0.65rem 0.9rem;
   font-size: 0.82rem;
-  color: #ff8080;
+  color: #d14343;
   margin-bottom: 1rem;
   display: flex;
   gap: 0.5rem;
@@ -179,11 +185,11 @@
 .btn-primary {
   width: 100%;
   padding: 0.85rem;
-  background: linear-gradient(135deg, #ff6b00, #ff8c38);
+  background: #e8622a;
   border: none;
   border-radius: 10px;
   color: #fff;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -194,7 +200,7 @@
 
   &:hover:not(:disabled) {
     transform: translateY(-1px);
-    box-shadow: 0 6px 28px rgba(255,107,0,0.45);
+    background: #d45420;
   }
   &:disabled { opacity: 0.6; cursor: not-allowed; }
   .spinner { display: inline-block; animation: spin 1s linear infinite; }
@@ -210,25 +216,26 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 1rem;
-  color: rgba(255,255,255,0.2);
+  color: #b29a8a;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
 
-  &::before, &::after {
+  &::before,
+  &::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: rgba(255,255,255,0.08);
+    background: rgba(232,98,42,.12);
   }
 }
 
 .btn-google {
   width: 100%;
   padding: 0.8rem;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: #faf8f6;
+  border: 1px solid rgba(232,98,42,.12);
   border-radius: 10px;
-  color: rgba(255,255,255,0.8);
+  color: #1a1208;
   font-family: 'DM Sans', sans-serif;
   font-size: 0.88rem;
   font-weight: 500;
@@ -241,21 +248,23 @@
   transition: background 0.2s;
 
   &:hover {
-    background: rgba(255,255,255,0.09);
-    border-color: rgba(255,255,255,0.2);
+    background: #f6f1ed;
+    border-color: rgba(232,98,42,.25);
   }
 }
 
 .switch-link {
   text-align: center;
   font-size: 0.82rem;
-  color: rgba(255,255,255,0.35);
+  color: #8b7565;
 
   a {
-    color: #ff6b00;
+    color: #e8622a;
     font-weight: 600;
-    cursor: pointer;
     margin-left: 0.3rem;
-    &:hover { text-decoration: underline; }
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
