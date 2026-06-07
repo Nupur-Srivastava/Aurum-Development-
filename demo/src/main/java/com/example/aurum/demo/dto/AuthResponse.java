@@ -10,6 +10,5 @@ public class AuthResponse {
     private Long userId;
     private String message;
     private String email;
-    private String password;
     private String token;
 }
