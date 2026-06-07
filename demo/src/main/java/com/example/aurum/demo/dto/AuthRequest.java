@@ -1,6 +1,8 @@
 package com.example.aurum.demo.dto;
 
+import com.example.aurum.demo.enumns.Category;
 import com.example.aurum.demo.enumns.ProjectSizeUnit;
+import com.example.aurum.demo.enumns.SubCategory;
 import lombok.Data;
 
 import java.util.Date;
@@ -12,11 +14,11 @@ public class AuthRequest {
     private String email;
     private String phone;
     private String password;
-    private String category;
+    private Category category;
     private String provider;
     private Boolean verified;
     private Integer yearsOfExperience;
-    private String subCategory;
+    private SubCategory subCategory;
     private Integer projectSize;
     private Date createdAt;
     private ProjectSizeUnit projectSizeUnit;

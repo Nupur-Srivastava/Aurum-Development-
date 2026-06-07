@@ -36,7 +36,6 @@ public class AuthController {
         return authService.login(request);
     }
 
-    // ✅ Google Sign In (existing users only)
     @GetMapping("/oauth-success")
     public ResponseEntity<?> googleLogin(@AuthenticationPrincipal OAuth2User user) {
 
@@ -55,6 +54,6 @@ public class AuthController {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         return ResponseEntity.ok(
-                new AuthResponse(existing.getId(), "Google Login Successful"));
+                new AuthResponse(existing.getId(), "Google Login Successful",null));
     }
 }

@@ -1,6 +1,8 @@
 package com.example.aurum.demo.enitity;
 
+import com.example.aurum.demo.enumns.Category;
 import com.example.aurum.demo.enumns.ProjectSizeUnit;
+import com.example.aurum.demo.enumns.SubCategory;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,11 +23,11 @@ public class User {
     private String email;
     private String phone;
     private String password;
-    private String category;
+    private Category category;
     private String provider;
     private Boolean verified;
     private Integer yearsOfExperience;
-    private String subCategory;
+    private SubCategory subCategory;
     private Integer projectSize;
     private Date createdAt;
     private ProjectSizeUnit projectSizeUnit;
@@ -33,8 +35,8 @@ public class User {
     public User() {
     }
 
-    public User(String fullName, String email, String phone, String password, String category, String provider, Boolean verified, Date createdAt, Integer yearsOfExperience,
-                String subCategory, Integer projectSize, ProjectSizeUnit projectSizeUnit) {
+    public User(String fullName, String email, String phone, String password, Category category, String provider, Boolean verified, Date createdAt, Integer yearsOfExperience,
+                SubCategory subCategory, Integer projectSize, ProjectSizeUnit projectSizeUnit) {
 
         this.fullName = fullName;
         this.email = email;
