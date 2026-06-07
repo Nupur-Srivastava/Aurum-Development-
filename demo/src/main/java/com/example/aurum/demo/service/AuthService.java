@@ -28,9 +28,6 @@ public class AuthService {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Email already registered. Please login instead.");
         }
-        if (userRepository.existsByPhone(request.getPhone())) {
-            throw new RuntimeException("Phone number already registered.");
-        }
 
         User user = new User();
         user.setFullName(request.getFullName());
