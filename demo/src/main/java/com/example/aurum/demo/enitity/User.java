@@ -13,7 +13,7 @@ import java.util.Date;
 @Table(name = "users")
 public class User {
 
-    @Id  // ✅ THIS IS THE FIX
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -28,9 +28,27 @@ public class User {
     private String subCategory;
     private Integer projectSize;
     private Date createdAt;
-
-    @Enumerated(EnumType.STRING)
     private ProjectSizeUnit projectSizeUnit;
 
-    public User() {}
+    public User() {
+    }
+
+    public User(String fullName, String email, String phone, String password, String category, String provider, Boolean verified, Date createdAt, Integer yearsOfExperience,
+                String subCategory, Integer projectSize, ProjectSizeUnit projectSizeUnit) {
+
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.category = category;
+        this.provider = provider;
+        this.verified = verified;
+        this.yearsOfExperience = yearsOfExperience;
+        this.subCategory = subCategory;
+        this.projectSize = projectSize;
+        this.projectSizeUnit = projectSizeUnit;
+        this.createdAt = createdAt;
+
+    }
+
 }

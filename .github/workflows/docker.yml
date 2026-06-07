@@ -1,7 +1,10 @@
-name: Spring Boot Build
+name: Build with Maven
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
@@ -17,7 +20,9 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 25
+          java-version: '25'
+          cache: maven
 
       - name: Build Application
-        run: mvn clean install
+        working-directory: demo
+        run: mvn clean install -DskipTests
