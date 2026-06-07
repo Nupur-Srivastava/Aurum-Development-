@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../../../core/services/auth.service'; 
 import { FindLabelPipe } from '../../../../shared/pipes/find-label.pipe';
 import {
   Role
@@ -19,7 +20,6 @@ import {
 import {
   COUNTRY_CODES
 } from '../../../../shared/constants/country.constants';
-import { AuthService } from '../../../../core/services/auth.service';
 
 function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
   const password = control.get('password');
@@ -75,6 +75,7 @@ export class SignupComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private elRef: ElementRef,
+    private authService: AuthService
   ) {}
  
   ngOnInit(): void {
@@ -311,8 +312,19 @@ private syncHierarchy(): void {
     payload.phoneNumber = `${this.selectedCountryCode.code}${payload.phoneNumber}`;
  
     // TODO: call this.authService.signUp(payload)
-    console.log('Signup payload:', payload);
-    setTimeout(() => { this.isLoading = false; this.router.navigate(['/signin']); },  1500); // remove when backend is ready
+    this.authService.signUp(payload)
+      .subscribe({
+        next: (response) => {
+          this.isLoading = false;
+          this.router.navigate(['/signin']);
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.errorMsg =
+            error.error?.message ??
+            'Signup failed';
+        }
+      });
   }
  
   onGoogle(): void {

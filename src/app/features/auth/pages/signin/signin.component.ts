@@ -41,14 +41,18 @@ export class SigninComponent implements OnInit {
     }
 
     this.isLoading = true;
+    const payload = this.signinForm.value;
     this.errorMessage = '';
 
-    this.authService.signIn(this.signinForm.value).subscribe({
-      next: (res) => {
-        this.authService.saveToken(res.token);
-        this.router.navigate(['/dashboard']);
-        this.isLoading = false;
-      },
+    this.authService.signIn(payload)
+      .subscribe({
+        next: (response) => {
+          localStorage.setItem(
+            'token',
+            response.token
+          );
+          this.router.navigate(['/dashboard']);
+        },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Invalid email or password.';
         this.isLoading = false;
