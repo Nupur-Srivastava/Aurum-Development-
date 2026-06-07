@@ -54,6 +54,6 @@ public class AuthController {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         return ResponseEntity.ok(
-                new AuthResponse(existing.getId(), "Google Login Successful",existing.getEmail(),token));
+                new AuthResponse(existing.getId(), "Google Login Successful",existing.getEmail(),null));
     }
 }
