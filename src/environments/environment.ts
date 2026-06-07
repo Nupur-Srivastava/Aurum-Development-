@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080/api'  // Your backend partner's local server
+  production: true,
+  apiUrl: 'https://aurum-development-production.up.railway.app/api'
 };
