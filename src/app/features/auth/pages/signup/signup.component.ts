@@ -310,13 +310,14 @@ private syncHierarchy(): void {
  
     const { confirmPassword, ...payload } = this.form.value;
     payload.phoneNumber = `${this.selectedCountryCode.code}${payload.phoneNumber}`;
+    console.log('Payload:', JSON.stringify(payload, null, 2));
  
     // TODO: call this.authService.signUp(payload)
     this.authService.signUp(payload)
       .subscribe({
         next: (response) => {
           this.isLoading = false;
-          this.router.navigate(['/signin']);
+          this.router.navigate(['auth/signin']);
         },
         error: (error) => {
           this.isLoading = false;

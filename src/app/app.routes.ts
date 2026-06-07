@@ -19,6 +19,12 @@ export const routes: Routes = [
         .then(m => m.SigninComponent)
   },
   {
+  path: 'auth/google-success',
+  loadComponent: () =>
+    import('./features/auth/pages/google-success/google-success.component')
+      .then(m => m.GoogleSuccessComponent)
+ },
+  {
   path: 'dashboard',
   loadComponent: () =>
     import('./features/dashboard/pages/dashboard/dashboard.component')

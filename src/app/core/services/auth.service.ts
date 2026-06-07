@@ -17,12 +17,12 @@ export class AuthService {
   }
 
   signIn(data: SignInFormData): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/auth/signin`, data);
+    return this.http.post<AuthResponse>(`${this.apiUrl}/auth/login`, data);
   }
 
   signInWithGoogle(): void {
     // Redirect to Google OAuth — backend handles this
-    window.location.href = `${this.apiUrl}/auth/google`;
+    window.location.href = `${this.apiUrl}/auth/outh-success`;
   }
 
   saveToken(token: string): void {
