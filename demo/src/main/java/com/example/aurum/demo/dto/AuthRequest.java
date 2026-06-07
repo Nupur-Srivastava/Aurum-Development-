@@ -22,7 +22,7 @@ public class AuthRequest {
     private Integer projectSize;
     private Date createdAt;
     private ProjectSizeUnit projectSizeUnit;
-    private List<String> categoryHierarchy;
+    private List<CategoryHierarchyDTO> categoryHierarchy;
 
     public ProjectSizeUnit getProjectSizeUnit(ProjectSizeUnit[] values) {
         return null;
