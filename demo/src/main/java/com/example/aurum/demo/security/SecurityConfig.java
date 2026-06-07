@@ -1,6 +1,6 @@
 package com.example.aurum.demo.security;
 
-import com.example.aurum.demo.entity.User;
+import com.example.aurum.demo.enitity.User;
 import com.example.aurum.demo.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
