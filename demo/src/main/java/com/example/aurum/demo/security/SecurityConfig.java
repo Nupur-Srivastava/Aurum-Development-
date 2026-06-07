@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+private final JwtService jwtService;
+private final UserRepository userRepository;
 
 @Configuration
 public class SecurityConfig {
@@ -43,9 +45,28 @@ public class SecurityConfig {
                         })
                 )
                 .oauth2Login(oauth -> oauth
-                        .defaultSuccessUrl("/api/auth/oauth-success", true)
-                );
+        .successHandler((request, response, authentication) -> {
 
-        return http.build();
+            OAuth2User user =
+                    (OAuth2User) authentication.getPrincipal();
+
+            String email = user.getAttribute("email");
+
+            User existing = userRepository.findByEmail(email)
+                    .orElseThrow(() ->
+                            new RuntimeException(
+                                    "Account not found. Please signup manually first."
+                            ));
+
+            String token =
+                    jwtService.generateToken(existing.getEmail());
+
+            response.sendRedirect(
+                    "http://localhost:4200/auth/google-success?token="
+                            + token
+            );
+        })
+)
+            return http.build();
     }
 }
