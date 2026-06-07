@@ -312,7 +312,7 @@ private syncHierarchy(): void {
  
     // TODO: call this.authService.signUp(payload)
     console.log('Signup payload:', payload);
-    setTimeout(() => { this.isLoading = false; }, 1500); // remove when backend is ready
+    setTimeout(() => { this.isLoading = false; this.router.navigate(['/signin']); },  1500); // remove when backend is ready
   }
  
   onGoogle(): void {

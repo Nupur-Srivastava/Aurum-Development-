@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth/signup',
+    redirectTo: 'auth/signin',
     pathMatch: 'full'
   },
   {
@@ -17,5 +17,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/auth/pages/signin/signin.component')
         .then(m => m.SigninComponent)
-  }
+  },
+  {
+  path: 'dashboard',
+  loadComponent: () =>
+    import('./features/dashboard/pages/dashboard/dashboard.component')
+      .then(m => m.DashboardComponent)
+}
 ];

@@ -12,45 +12,108 @@
   overflow: hidden;
 }
 
+// ─── Architectural background ─────────────────────────────────────────────────
 .bg-layer {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
 }
-
-.grid-overlay {
-  position: absolute;
-  inset: 0;
+ 
+// Two-level grid: 20px minor + 100px major
+.bg-grid {
+  position: absolute; inset: 0;
   background-image:
-    linear-gradient(rgba(232,98,42,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(232,98,42,.06) 1px, transparent 1px);
-  background-size: 48px 48px;
+    linear-gradient(rgba(160,130,95,.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(160,130,95,.09) 1px, transparent 1px),
+    linear-gradient(rgba(160,130,95,.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(160,130,95,.16) 1px, transparent 1px);
+  background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
 }
-
-.orb {
+ 
+// Diagonal hatching — very faint, like tracing paper
+.bg-lines {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 39px,
+    rgba(160,130,95,.04) 39px,
+    rgba(160,130,95,.04) 40px
+  );
+}
+ 
+// Dot markers at major grid intersections
+.bg-markers {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(232,98,42,.2) 1.2px, transparent 1.2px);
+  background-size: 100px 100px;
+  background-position: 50px 50px;
+}
+ 
+// Geometric structural shapes
+.bg-shapes {
+  position: absolute; inset: 0;
+  // Large hexagon top-right
+  &::before {
+    content: '';
+    position: absolute;
+    top: -130px; right: -130px;
+    width: 540px; height: 540px;
+    border: 1.5px solid rgba(232,98,42,.09);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: radial-gradient(circle at 65% 35%, rgba(232,98,42,.04), transparent 60%);
+  }
+  // Large circle bottom-left
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -180px; left: -180px;
+    width: 500px; height: 500px;
+    border: 1.5px solid rgba(160,130,95,.11);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 65%, rgba(200,170,130,.05), transparent 60%);
+  }
+}
+ 
+// Corner bracket marks — architectural drawing convention
+.bg-corner {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
+  top: 28px; left: 28px;
+  width: 48px; height: 48px;
+  border-top: 2px solid rgba(232,98,42,.22);
+  border-left: 2px solid rgba(232,98,42,.22);
+}
+.bg-corner-br {
+  position: absolute;
+  bottom: 28px; right: 28px;
+  width: 48px; height: 48px;
+  border-bottom: 2px solid rgba(160,130,95,.18);
+  border-right: 2px solid rgba(160,130,95,.18);
+}
+.eye-btn {
+  background: none; border: none; cursor: pointer;
+  padding: 0 .65rem; display: flex; align-items: center;
+  svg { width: 15px; height: 15px; color: #b8a898; }
+  &:hover svg { color: #e8622a; }
 }
 
-.orb-1 {
-  width: 480px;
-  height: 480px;
-  background: radial-gradient(#e8622a, transparent 70%);
-  opacity: .12;
-}
+// ─── Brand ────────────────────────────────────────────────────────────────────
+.brand {
+  position: fixed; top: 1.4rem; left: 2rem;
+  display: flex; align-items: center; gap: .6rem;
+  text-decoration: none; z-index: 20;
 
-.orb-2 {
-  width: 360px;
-  height: 360px;
-  background: radial-gradient(#f09060, transparent 70%);
-  opacity: .1;
-}
+  .brand-icon svg { width: 34px; height: 34px; }
 
-@keyframes orb-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-25px); }
+  .brand-text {
+    display: flex; flex-direction: column; line-height: 1.1;
+    .brand-name {
+      font-family: 'Manrope', sans-serif; font-weight: 800;
+      font-size: 1.05rem; color: #1a1208; letter-spacing: .06em;
+    }
+    .brand-tagline {
+      font-size: .58rem; font-weight: 500; letter-spacing: .16em;
+      text-transform: uppercase; color: #a08060;
+    }
+  }
 }
 
 .brand-mark {

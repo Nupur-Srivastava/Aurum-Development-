@@ -1,15 +1,27 @@
 <div class="auth-root">
   <div class="bg-layer">
-    <div class="grid-overlay"></div>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-lines"></div>
+    <div class="bg-markers"></div>
+    <div class="bg-shapes"></div>
+    <div class="bg-corner"></div>
+    <div class="bg-corner-br"></div>
   </div>
 
-  <div class="brand-mark">
-    <span class="brand-icon">⬡</span>
-    <span class="brand-text">AEC</span>
-    <span class="brand-sub">Platform</span>
-  </div>
+  <!-- Brand -->
+  <a class="brand" routerLink="/">
+    <div class="brand-icon">
+      <svg viewBox="0 0 32 32" fill="none">
+        <polygon points="16,2 30,10 30,22 16,30 2,22 2,10" fill="none" stroke="#e8622a" stroke-width="2"/>
+        <polygon points="16,8 24,13 24,21 16,26 8,21 8,13" fill="#e8622a" opacity="0.15"/>
+        <text x="16" y="21" text-anchor="middle" font-size="10" font-weight="800" fill="#e8622a" font-family="Syne,sans-serif">A</text>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <span class="brand-name">AEC</span>
+      <span class="brand-tagline">Platform</span>
+    </div>
+  </a>
 
   <div class="form-card">
     <div class="form-header">
@@ -34,8 +46,9 @@
         <div class="input-wrap" [class.error]="hasError('password', 'required')">
           <span class="input-icon">◆</span>
           <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Your password" autocomplete="current-password" />
-          <button type="button" class="toggle-pwd" (click)="showPassword = !showPassword">
-            {{ showPassword ? '◴' : '◷' }}
+          <button type="button" class="eye-btn" (click)="showPassword = !showPassword" tabindex="-1">
+            <svg *ngIf="!showPassword" viewBox="0 0 20 20" fill="none"><path d="M2 10s3-5.5 8-5.5S18 10 18 10s-3 5.5-8 5.5S2 10 2 10z" stroke="currentColor" stroke-width="1.4"/><circle cx="10" cy="10" r="2.5" stroke="currentColor" stroke-width="1.4"/></svg>
+              <svg *ngIf="showPassword" viewBox="0 0 20 20" fill="none"><path d="M3 3l14 14M8.5 8.8A2.5 2.5 0 0113.2 11.5M6 5.8C4.2 7.1 2.5 10 2.5 10s3 5.5 7.5 5.5a7.4 7.4 0 003.5-.9M10.5 4.5C14.5 4.5 17.5 10 17.5 10s-.8 1.5-2 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
           </button>
         </div>
         <span class="err-msg" *ngIf="hasError('password', 'required')">Password is required</span>
