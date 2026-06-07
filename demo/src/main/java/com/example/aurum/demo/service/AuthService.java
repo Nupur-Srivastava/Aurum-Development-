@@ -46,7 +46,7 @@ public class AuthService {
         user.setYearsOfExperience(request.getYearsOfExperience());
 
         user = userRepository.save(user);
-        return new AuthResponse(user.getId(), "Signup Successful",user.getEmail(),token);
+        return new AuthResponse(user.getId(), "Signup Successful",user.getEmail(),user.getPassword());
     }
     public AuthResponse login(AuthRequest request) {
 
