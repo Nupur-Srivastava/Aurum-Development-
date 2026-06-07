@@ -1,0 +1,333 @@
+// Same base styles — import from signup or duplicate
+// For a real project, move shared styles to a _auth-shared.scss partial
+
+.auth-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5.5rem 1rem 2.5rem;
+  position: relative;
+  background: #f4f1ed;
+  overflow: hidden;
+}
+
+// ─── Architectural background ─────────────────────────────────────────────────
+.bg-layer {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
+ 
+// Two-level grid: 20px minor + 100px major
+.bg-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(160,130,95,.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(160,130,95,.09) 1px, transparent 1px),
+    linear-gradient(rgba(160,130,95,.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(160,130,95,.16) 1px, transparent 1px);
+  background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+}
+ 
+// Diagonal hatching — very faint, like tracing paper
+.bg-lines {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 39px,
+    rgba(160,130,95,.04) 39px,
+    rgba(160,130,95,.04) 40px
+  );
+}
+ 
+// Dot markers at major grid intersections
+.bg-markers {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(232,98,42,.2) 1.2px, transparent 1.2px);
+  background-size: 100px 100px;
+  background-position: 50px 50px;
+}
+ 
+// Geometric structural shapes
+.bg-shapes {
+  position: absolute; inset: 0;
+  // Large hexagon top-right
+  &::before {
+    content: '';
+    position: absolute;
+    top: -130px; right: -130px;
+    width: 540px; height: 540px;
+    border: 1.5px solid rgba(232,98,42,.09);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    background: radial-gradient(circle at 65% 35%, rgba(232,98,42,.04), transparent 60%);
+  }
+  // Large circle bottom-left
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -180px; left: -180px;
+    width: 500px; height: 500px;
+    border: 1.5px solid rgba(160,130,95,.11);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 65%, rgba(200,170,130,.05), transparent 60%);
+  }
+}
+ 
+// Corner bracket marks — architectural drawing convention
+.bg-corner {
+  position: absolute;
+  top: 28px; left: 28px;
+  width: 48px; height: 48px;
+  border-top: 2px solid rgba(232,98,42,.22);
+  border-left: 2px solid rgba(232,98,42,.22);
+}
+.bg-corner-br {
+  position: absolute;
+  bottom: 28px; right: 28px;
+  width: 48px; height: 48px;
+  border-bottom: 2px solid rgba(160,130,95,.18);
+  border-right: 2px solid rgba(160,130,95,.18);
+}
+.eye-btn {
+  background: none; border: none; cursor: pointer;
+  padding: 0 .65rem; display: flex; align-items: center;
+  svg { width: 15px; height: 15px; color: #b8a898; }
+  &:hover svg { color: #e8622a; }
+}
+
+// ─── Brand ────────────────────────────────────────────────────────────────────
+.brand {
+  position: fixed; top: 1.4rem; left: 2rem;
+  display: flex; align-items: center; gap: .6rem;
+  text-decoration: none; z-index: 20;
+
+  .brand-icon svg { width: 34px; height: 34px; }
+
+  .brand-text {
+    display: flex; flex-direction: column; line-height: 1.1;
+    .brand-name {
+      font-family: 'Manrope', sans-serif; font-weight: 800;
+      font-size: 1.05rem; color: #1a1208; letter-spacing: .06em;
+    }
+    .brand-tagline {
+      font-size: .58rem; font-weight: 500; letter-spacing: .16em;
+      text-transform: uppercase; color: #a08060;
+    }
+  }
+}
+
+.brand-mark {
+  position: fixed;
+  top: 1.5rem; left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 10;
+  font-family: 'Manrope', sans-serif;
+
+  .brand-icon { font-size: 1.4rem; color: #ff6b00; }
+  .brand-text { font-size: 1.1rem; font-weight: 800; color: #1a1208; letter-spacing: 0.1em; }
+  .brand-sub { font-size: 0.7rem; color: #a08060; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 2px; }
+}
+
+.form-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border: 1px solid rgba(232,98,42,.12);
+  border-radius: 20px;
+  padding: 2.5rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 1px 3px rgba(0,0,0,.04),
+    0 8px 32px rgba(232,98,42,.08),
+    0 24px 64px rgba(0,0,0,.06);;
+  animation: card-in 0.5s ease-out both;
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.form-header {
+  margin-bottom: 2rem;
+  h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #1a1208;
+    letter-spacing: -0.02em;
+  }
+  p { font-size: 0.85rem; color: #9a8070; margin-top: 0.3rem; }
+}
+
+.field-group {
+  margin-bottom: 1.1rem;
+  label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7a6858;
+    margin-bottom: 0.45rem;
+  }
+}
+
+.input-wrap {
+  display: flex;
+  align-items: center;
+  background: #faf8f6;
+  border: 1.5px solid rgba(232,98,42,.12);
+  border-radius: 10px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:focus-within {
+    border-color: rgba(255,107,0,0.6);
+    box-shadow: 0 0 0 3px rgba(255,107,0,0.1);
+  }
+  &.error {
+    border-color: rgba(255,80,80,0.5);
+  }
+
+  .input-icon {
+    padding: 0 0.7rem;
+    color: #b29a8a;
+    font-size: 0.9rem;
+    pointer-events: none;
+  }
+
+  input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #1a1208;
+    font-size: 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    padding: 0.7rem 0.75rem 0.7rem 0;
+    &::placeholder { color: #a88a75; }
+  }
+}
+
+.toggle-pwd {
+  background: none;
+  border: none;
+  color: #a88a75;
+  cursor: pointer;
+  padding: 0 0.75rem;
+  font-size: 1rem;
+
+  &:hover {
+    color: #e8622a;
+  }
+}
+
+.err-msg {
+  display: block;
+  font-size: 0.7rem;
+  color: #ff6060;
+  margin-top: 0.3rem;
+  padding-left: 0.2rem;
+}
+
+.api-error {
+  background: #fff1f0;
+  border: 1px solid #ffd4cf;
+  border-radius: 8px;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.82rem;
+  color: #d14343;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 0.85rem;
+  background: #e8622a;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(255,107,0,0.3);
+  margin-bottom: 1rem;
+  transition: transform 0.15s, box-shadow 0.15s;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    background: #d45420;
+  }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+  .spinner { display: inline-block; animation: spin 1s linear infinite; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  color: #b29a8a;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(232,98,42,.12);
+  }
+}
+
+.btn-google {
+  width: 100%;
+  padding: 0.8rem;
+  background: #faf8f6;
+  border: 1px solid rgba(232,98,42,.12);
+  border-radius: 10px;
+  color: #1a1208;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #f6f1ed;
+    border-color: rgba(232,98,42,.25);
+  }
+}
+
+.switch-link {
+  text-align: center;
+  font-size: 0.82rem;
+  color: #8b7565;
+
+  a {
+    color: #e8622a;
+    font-weight: 600;
+    margin-left: 0.3rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
