@@ -40,6 +40,7 @@ public class AuthService {
         user.setYearsOfExperience(request.getYearsOfExperience());
         user.setSubCategory(request.getSubCategory());
         user.setProjectSize(request.getProjectSize());
+        user.setProjectType(request.getProjectType());
         user.setProjectSizeUnit(request.getProjectSizeUnit());
         user.setCreatedAt(new Date());
 
