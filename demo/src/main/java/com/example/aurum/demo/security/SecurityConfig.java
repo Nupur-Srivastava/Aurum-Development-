@@ -27,6 +27,7 @@ public class SecurityConfig {
                                 "/login/**").permitAll().anyRequest().authenticated()
                 )
                 .formLogin(form -> form.disable())
+                .httpBasic(basic -> basic.disable())
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint((request, response, authException) -> {
                             String acceptHeader = request.getHeader("Accept");
