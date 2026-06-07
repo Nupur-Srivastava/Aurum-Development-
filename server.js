@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-const distPath = path.join(__dirname, 'dist/aec-platform');
+const distPath = path.join(__dirname, 'dist/aec-platform/browser');
 
 app.use(express.static(distPath));
 
