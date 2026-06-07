@@ -3,6 +3,7 @@ package com.example.aurum.demo.controller;
 import com.example.aurum.demo.dto.AuthRequest;
 import com.example.aurum.demo.dto.AuthResponse;
 import com.example.aurum.demo.service.AuthService;
+import com.example.aurum.demo.security.JwtService;
 import com.example.aurum.demo.repository.UserRepository;
 import com.example.aurum.demo.enitity.User;
 
