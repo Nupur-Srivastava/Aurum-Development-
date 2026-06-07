@@ -24,6 +24,7 @@ public class AuthController {
     public final AuthService authService;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     @PostMapping("/signup")
     public AuthResponse signup(@RequestBody AuthRequest request) {
