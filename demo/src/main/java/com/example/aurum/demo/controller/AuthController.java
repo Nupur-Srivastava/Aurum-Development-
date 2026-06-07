@@ -52,8 +52,10 @@ public class AuthController {
 
         User existing = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-
+        
+        String token = jwtService.generateToken(existing.getEmail());
+        
         return ResponseEntity.ok(
-                new AuthResponse(existing.getId(), "Google Login Successful",existing.getEmail(),null));
+                new AuthResponse(existing.getId(), "Google Login Successful",existing.getEmail(),token));
     }
 }
