@@ -19,14 +19,14 @@ public class User {
 
     private String fullName;
     private String email;
-    private String phone;
+    private String phoneNumber;
     private String password;
     private String provider;
     private Boolean verified;
     private Integer yearsOfExperience;
     private Integer projectSize;
     @Enumerated(EnumType.STRING)
-    private Role category;
+    private Role role;
     @Enumerated(EnumType.STRING)
     private ConsultantSubCat1 subCategory;
     @Enumerated(EnumType.STRING)
@@ -37,14 +37,14 @@ public class User {
     public User() {
     }
 
-    public User(String fullName, String email, String phone, String password, Role category, String provider, Boolean verified, Date createdAt, Integer yearsOfExperience,
+    public User(String fullName, String email, String phoneNumber, String password, Role category, String provider, Boolean verified, Date createdAt, Integer yearsOfExperience,
                 ConsultantSubCat1 subCategory, Integer projectSize, ProjectSizeUnit projectSizeUnit, ProjectType projectType) {
 
         this.fullName = fullName;
         this.email = email;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
         this.password = password;
-        this.category = category;
+        this.role = category;
         this.provider = provider;
         this.verified = verified;
         this.yearsOfExperience = yearsOfExperience;

@@ -3,6 +3,7 @@ package com.example.aurum.demo.service;
 import com.example.aurum.demo.dto.AuthRequest;
 import com.example.aurum.demo.dto.AuthResponse;
 import com.example.aurum.demo.enitity.User;
+import com.example.aurum.demo.enumns.ProjectSizeUnit;
 import com.example.aurum.demo.repository.UserRepository;
 import com.example.aurum.demo.security.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -11,9 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +21,6 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final Map<String, String> otpStore = new ConcurrentHashMap<>();
 
     public AuthResponse signup(AuthRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
@@ -32,20 +30,23 @@ public class AuthService {
         User user = new User();
         user.setFullName(request.getFullName());
         user.setEmail(request.getEmail());
-        user.setPhone(request.getPhone());
-        user.setCategory(request.getCategory());
+        user.setRole(request.getRole());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setVerified(false);
         user.setProvider("LOCAL");
-        user.setYearsOfExperience(request.getYearsOfExperience());
         user.setSubCategory(request.getSubCategory());
         user.setProjectSize(request.getProjectSize());
         user.setProjectType(request.getProjectType());
-        user.setProjectSizeUnit(request.getProjectSizeUnit());
+        user.setProjectSizeUnit(request.getProjectSizeUnit(ProjectSizeUnit.values()));
         user.setCreatedAt(new Date());
+        user.setFullName(request.getFullName());
+        user.setEmail(request.getEmail());
+        user.setPhoneNumber(request.getPhoneNumber());
+        user.setRole(request.getRole());
+        user.setYearsOfExperience(request.getYearsOfExperience());
 
         user = userRepository.save(user);
-        return new AuthResponse(user.getId(), "Signup Successful",null);
+        return new AuthResponse(user.getId(), "Signup Successful",null,user.getEmail(),user.getPassword());
     }
     public AuthResponse login(AuthRequest request) {
 
@@ -57,6 +58,6 @@ public class AuthService {
         }
 
         String token = jwtService.generateToken(user.getEmail());
-        return new AuthResponse(user.getId(), "Login Successful", token);
+        return new AuthResponse(user.getId(), "Login Successful", token,user.getEmail(),user.getPassword());
     }
 }

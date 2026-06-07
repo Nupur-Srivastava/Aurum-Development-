@@ -18,8 +18,7 @@ public class JwtService {
 
     public String generateToken(String email) {
 
-        return Jwts.builder()
-                .subject(email)
+        return Jwts.builder().subject(email)
                 .issuedAt(new Date())
                 .expiration(
                         new Date(System.currentTimeMillis()

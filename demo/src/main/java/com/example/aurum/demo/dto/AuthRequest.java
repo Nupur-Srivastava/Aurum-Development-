@@ -4,15 +4,16 @@ import com.example.aurum.demo.enumns.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class AuthRequest {
 
     private String fullName;
     private String email;
-    private String phone;
+    private String phoneNumber;
     private String password;
-    private Role category;
+    private Role role;
     private String provider;
     private Boolean verified;
     private Integer yearsOfExperience;
@@ -21,4 +22,9 @@ public class AuthRequest {
     private Integer projectSize;
     private Date createdAt;
     private ProjectSizeUnit projectSizeUnit;
+    private List<String> categoryHierarchy;
+
+    public ProjectSizeUnit getProjectSizeUnit(ProjectSizeUnit[] values) {
+        return null;
+    }
 }
