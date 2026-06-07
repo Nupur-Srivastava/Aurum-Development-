@@ -8,6 +8,7 @@ import com.example.aurum.demo.enitity.User;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -29,20 +30,31 @@ public class AuthController {
         return authService.signup(request);
     }
 
+    // ✅ Email/Password Login
+    @PostMapping("/login")
+    public AuthResponse login(@RequestBody AuthRequest request) {
+        return authService.login(request);
+    }
+
+    // ✅ Google Sign In (existing users only)
     @GetMapping("/oauth-success")
-    public String googleLogin(@AuthenticationPrincipal OAuth2User user) {
+    public ResponseEntity<?> googleLogin(@AuthenticationPrincipal OAuth2User user) {
+
+        if (user == null) {
+            return ResponseEntity.status(401).body("OAuth2 login failed");
+        }
+
         String email = user.getAttribute("email");
-        String name = user.getAttribute("name");
 
         if (!userRepository.existsByEmail(email)) {
-            User newUser = new User();
-            newUser.setEmail(email);
-            newUser.setFullName(name);
-            newUser.setProvider("GOOGLE");
-            newUser.setVerified(true);
-            newUser.setCreatedAt(new Date());
-            userRepository.save(newUser);
+            return ResponseEntity.status(403)
+                    .body("Account not found. Please signup manually first.");
         }
-        return "Login success: " + email;
+
+        User existing = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return ResponseEntity.ok(
+                new AuthResponse(existing.getId(), "Google Login Successful"));
     }
 }

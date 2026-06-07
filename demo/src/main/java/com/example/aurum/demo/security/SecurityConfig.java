@@ -20,31 +20,31 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/auth/**",
                                 "/oauth2/**",
-                                "/login/**"
-                        ).permitAll()
-                        .anyRequest().authenticated()
+                                "/login/**").permitAll().anyRequest().authenticated()
                 )
-
                 .formLogin(form -> form.disable())
-
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint((request, response, authException) -> {
-                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                            response.setContentType("application/json");
-                            response.getWriter().write("{\"error\": \"Unauthorized\"}");
+                            String acceptHeader = request.getHeader("Accept");
+                            String requestedWith = request.getHeader("X-Requested-With");
+                            if ("XMLHttpRequest".equals(requestedWith) ||
+                                    (acceptHeader != null && acceptHeader.contains("application/json"))) {
+                                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                                response.setContentType("application/json");
+                                response.getWriter().write("{\"error\": \"Unauthorized\"}");
+                            } else {
+                                response.sendRedirect("/oauth2/authorization/google");
+                            }
                         })
                 )
-
                 .oauth2Login(oauth -> oauth
                         .defaultSuccessUrl("/api/auth/oauth-success", true)
                 );
 
         return http.build();
     }
-
 }
