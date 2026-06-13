@@ -12,6 +12,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 import com.example.aurum.demo.security.JwtService;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 public class SecurityConfig {
@@ -29,6 +34,29 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+  @Bean
+  public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+
+    configuration.setAllowedOrigins(List.of(
+      "https://aurum-development-frontend-production.up.railway.app",
+      "http://localhost:4200"
+    ));
+
+    configuration.setAllowedMethods(List.of(
+      "GET", "POST", "PUT", "DELETE", "OPTIONS"
+    ));
+
+    configuration.setAllowedHeaders(List.of("*"));
+    configuration.setAllowCredentials(true);
+
+    UrlBasedCorsConfigurationSource source =
+      new UrlBasedCorsConfigurationSource();
+
+    source.registerCorsConfiguration("/**", configuration);
+
+    return source;
+  }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -65,12 +93,13 @@ public class SecurityConfig {
                         ));
 
                     String token = jwtService.generateToken(existing.getEmail());
-                    response.sendRedirect(
-                        "http://localhost:4200/auth/google-success?token=" + token
-                    );
+                  response.sendRedirect(
+                    "https://aurum-development-frontend-production.up.railway.app/auth/google-success?token=" + token
+                  );
                 })
             );  // <-- closing semicolon for http chain
 
         return http.build();
     }
+
 }
