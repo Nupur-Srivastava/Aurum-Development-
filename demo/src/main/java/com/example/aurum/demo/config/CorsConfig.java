@@ -3,27 +3,35 @@ package com.example.aurum.demo.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+
+import java.util.List;
 
 @Configuration
 public class CorsConfig {
 
-    @Bean
-    public CorsFilter corsFilter() {
+  @Bean
+  public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
 
-        CorsConfiguration config = new CorsConfiguration();
+    configuration.setAllowedOrigins(List.of(
+      "https://aurum-development-frontend-production.up.railway.app"
+    ));
 
-        config.addAllowedOrigin("http://localhost:4200");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        config.setAllowCredentials(true);
+    configuration.setAllowedMethods(List.of(
+      "GET", "POST", "PUT", "DELETE", "OPTIONS"
+    ));
 
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
+    configuration.setAllowedHeaders(List.of("*"));
+    configuration.setAllowCredentials(true);
 
-        source.registerCorsConfiguration("/**", config);
+    UrlBasedCorsConfigurationSource source =
+      new UrlBasedCorsConfigurationSource();
 
-        return new CorsFilter(source);
-    }
+    source.registerCorsConfiguration("/**", configuration);
+
+    return source;
+  }
 }
