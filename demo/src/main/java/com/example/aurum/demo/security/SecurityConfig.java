@@ -39,10 +39,8 @@ public class SecurityConfig {
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
 
-    configuration.setAllowedOriginPatterns(List.of(
-      "https://aurum-development-frontend-production.up.railway.app",
-      "http://localhost:4200"
-    ));
+    configuration.addAllowedOrigin("https://aurum-development-frontend-production.up.railway.app"
+    );
 
     configuration.setAllowedMethods(List.of(
       "GET", "POST", "PUT", "DELETE", "OPTIONS"

@@ -22,8 +22,7 @@ import java.util.Date;
 @RequestMapping("/api/auth")
 @CrossOrigin(
   origins = {
-    "https://aurum-development-frontend-production.up.railway.app",
-    "http://localhost:4200"
+    "https://aurum-development-frontend-production.up.railway.app"
   },
   allowCredentials = "true"
 )
