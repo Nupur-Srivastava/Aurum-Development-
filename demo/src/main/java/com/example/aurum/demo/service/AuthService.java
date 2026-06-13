@@ -5,7 +5,7 @@ import com.example.aurum.demo.dto.AuthResponse;
 import com.example.aurum.demo.enitity.User;
 import com.example.aurum.demo.enumns.ProjectSizeUnit;
 import com.example.aurum.demo.repository.UserRepository;
-import com.example.aurum.demo.security.JwtService;
+import com.example.aurum.demo.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.example.aurum.demo.security;
+package com.example.aurum.demo.service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

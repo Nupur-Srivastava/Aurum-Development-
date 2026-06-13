@@ -3,7 +3,7 @@ package com.example.aurum.demo.controller;
 import com.example.aurum.demo.dto.AuthRequest;
 import com.example.aurum.demo.dto.AuthResponse;
 import com.example.aurum.demo.service.AuthService;
-import com.example.aurum.demo.security.JwtService;
+import com.example.aurum.demo.service.JwtService;
 import com.example.aurum.demo.repository.UserRepository;
 import com.example.aurum.demo.enitity.User;
 
@@ -20,6 +20,13 @@ import java.util.Date;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(
+  origins = {
+    "https://aurum-development-frontend-production.up.railway.app",
+    "http://localhost:4200"
+  },
+  allowCredentials = "true"
+)
 public class AuthController {
 
     public final AuthService authService;
@@ -54,9 +61,9 @@ public class AuthController {
 
         User existing = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        
+
         String token = jwtService.generateToken(existing.getEmail());
-        
+
         return ResponseEntity.ok(
                 new AuthResponse(existing.getId(), "Google Login Successful",existing.getEmail(),token));
     }
