@@ -20,12 +20,6 @@ import java.util.Date;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(
-  origins = {
-    "https://aurum-development-frontend-production.up.railway.app"
-  },
-  allowCredentials = "true"
-)
 public class AuthController {
 
     public final AuthService authService;
