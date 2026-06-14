@@ -56,7 +56,7 @@ public class SecurityConfig {
   }
 
   @Bean
-  public FilterRegistrationBean<CorsFilter> corsFilter() {
+  public FilterRegistrationBean<CorsFilter> corsFilterRegistration() {
     CorsConfiguration configuration = new CorsConfiguration();
     configuration.setAllowedOriginPatterns(List.of(
       "https://aurum-development-frontend-production.up.railway.app",
